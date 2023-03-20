@@ -1,0 +1,1 @@
+binlog            starttime           stoptime            startpos   stoppos    inserts  updates  deletes  database        table               
