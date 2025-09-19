@@ -13,6 +13,43 @@ show master status
  -ignore-tables                default nul
  
 ./my2sql -user root -password **** -host 127.0.0.1   -port 3306  -mode repl  -work-type 2sql -start-file mysql-bin.000604 -stop-file mysql-bin.000605
+
+
+./my2sql  -user root -password 123456 -host 192.168.2.6  -port 3306  
+-work-type rollback 
+-output-toScreen  
+-databases db 
+-tables goods 
+-sql delete
+
+开始binlog读取到最后
+ -start-datetime "2020-07-16 10:20:00"
+ -stop-datetime "2020-07-16 11:00:00" 
+
+repl: 伪装成从库解析binlog文件，
+file: 离线解析binlog文件, 
+默认repl
+./my2sql  -user root -password bzdmmynj -host 192.168.2.6  -port 3306  
+-mode file 
+-work-type sql 
+ -local-binlog-file /www/server/data/mysql-bin.001541 
+-start-file /www/server/data/mysql-bin.001544
+-output-toScreen
+
+
+-doNotAddPrifixDb
+-file-per-table 为每个表生成一个sql文件
+-databases  
+ -tables
+-output-toScreen
+-work-type
+2sql：生成原始sql，rollback：生成回滚sql，stats：只统计DML、事务信息
+
+
+当指定-mode=file 参数时，需要指定-local-binlog-file binlog文件相对路径或绝对路径,可以连续解析多个binlog文件，只需要指定起始文件名，程序会自动持续解析下个文件（无效）
+ -mode file 
+ -local-binlog-file /www/server/data/mysql-bin.001541
+-start-file /www/server/data/mysql-bin.001549
 ```
 
 # 用途
