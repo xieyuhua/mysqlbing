@@ -11,7 +11,25 @@ show master status
  -ignore-databases             default null
  -ignore-primaryKey-forInsert  ignore primary key
  -ignore-tables                default nul
- 
+
+
+回滚sql:
+./my2sql  -user root -password bzdmmynj -host 192.168.2.6  -port 3306  -work-type rollback -output-toScreen -start-datetime "2025-11-27 02:00:00" -stop-datetime "2025-11-27 19:00:00" -databases diygw -tables auth_data_kanban sql update >> 20251128.txt
+
+解析sql:
+./my2sql  -user root -password bzdmmynj -host 192.168.2.6  -port 3306  -work-type 2sql -output-toScreen -start-datetime "2025-11-27 02:00:00" -stop-datetime "2025-11-27 19:00:00" -databases diygw -tables auth_data_kanban sql update >> 20251128-1.txt
+
+带上时间：
+ -work-type rollback
+ -add-extraInfo true  
+
+ -add-extraInfo
+    Works with -work-type=2sql|rollback. Print database/table/datetime/binlogposition...info on the line before sql, default false
+
+
+
+
+
 ./my2sql -user root -password **** -host 127.0.0.1   -port 3306  -mode repl  -work-type 2sql -start-file mysql-bin.000604 -stop-file mysql-bin.000605
 
 
